@@ -34,7 +34,8 @@ la mascara es la que organiza los host en una red bit a bit
 3.5. ¿Puedes mencionar algunos protocolos de enrutamiento dinámico y
 explicar brevemente cómo funcionan?
 
-esttico y dinimanico 
+dhcp  este se ecuentra configurado en el router y de forma automatica despues de establecer 
+un rango de ip, el sistema operativo pide a ip al router el router se la asigna y asi con cada equipo
 
 
 
