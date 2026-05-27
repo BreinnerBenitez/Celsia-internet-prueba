@@ -5,7 +5,6 @@ _________
 2.3. ¿Qué estrategia de escalabilidad recomendarías para la aplicación
 considerando que el crecimiento proyectado será de 1,000,000 de clientes
 por año?
-____________
  una arquictetura multiservicio con docker aws y balanceador de cargas
  backend por un  lado y el frontend por el otro
  ________
@@ -20,12 +19,14 @@ _________________________
 3.2. Describe las siete capas del modelo OSI y menciona brevemente la
 capa  fisica = los cables como rja45 o utp etc
 capa enlace= donde se encuentra la mac en nic
-capa red = donde se manejan tcp/ipv4 = esya es la mas importante
-capa de seeison= donde estan los protocolos de conexion 
+capa red = donde se manejan ipv4 = esa es la mas importante
+capa de trasporte= tcp / udp
+capa de seeison ,aplicacion= donde estan los protocolos de conexion 
+ 
 ____________
 3.3. Explica las diferencias entre los protocolos TCP y UDP. Dar un ejemplo
 de cuándo usarías cada uno?
-uno es para strinming y el otro es para conexiones estables.
+uno es para streanming -udp y el otro es para conexiones estables Tcp
 
 3.4. ¿Qué es una máscara de subred y cómo se utiliza para dividir una red en
 subredes más pequeñas?
@@ -35,7 +36,12 @@ la mascara es la que organiza los host en una red bit a bit
 explicar brevemente cómo funcionan?
 
 dhcp  este se ecuentra configurado en el router y de forma automatica despues de establecer 
-un rango de ip, el sistema operativo pide a ip al router el router se la asigna y asi con cada equipo 
+un rango de ip, el sistema operativo pide la ip al router el router se la asigna y asi con cada equipo 
+
+____
+
+##relizare mejoras sugeridas en otra rama para no tocar la de la prueba  en el tiempo propuesto; que se hizo con mis 
+colegas. 
 
 
 
