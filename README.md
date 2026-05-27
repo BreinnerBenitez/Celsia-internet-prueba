@@ -39,9 +39,8 @@ dhcp  este se ecuentra configurado en el router y de forma automatica despues de
 un rango de ip, el sistema operativo pide la ip al router el router se la asigna y asi con cada equipo 
 
 ____
-
-##relizare mejoras sugeridas en otra rama para no tocar la de la prueba  en el tiempo propuesto; que se hizo con mis 
-colegas. 
+**relizare mejoras sugeridas en otra rama para no tocar la de la prueba  en el tiempo propuesto; que se hizo con mis 
+colegas.** 
 
 
 
