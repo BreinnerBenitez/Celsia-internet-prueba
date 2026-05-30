@@ -1,8 +1,10 @@
 package com.celsia.internet.controller;
 
+import com.celsia.internet.dto.ClienteDTO;
 import com.celsia.internet.model.Cliente;
 import com.celsia.internet.service.IClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,8 +17,8 @@ public class ClienteController {
     private IClienteService clienteService;
 
     @GetMapping
-    public    List<Cliente> getCliente() {
-        return clienteService.getCliente();
+    public ResponseEntity <List<ClienteDTO>> getCliente() {
+        return  ResponseEntity.ok(clienteService.getCliente());
     }
 
     @PostMapping("/crear")
