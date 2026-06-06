@@ -1,11 +1,13 @@
 package com.celsia.internet.service;
 
+import com.celsia.internet.dto.ServicioDTO;
 import com.celsia.internet.model.Cliente;
 import com.celsia.internet.model.Servicio;
 import com.celsia.internet.repository.IServicioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,10 +18,26 @@ public class ServicioService implements IServicioService {
     private IServicioRepository servicioRepo;
 
     @Override
-    public List<Servicio> getServicio() {
+    public List<ServicioDTO> getServicio() {
 
         List<Servicio> listaServicio = servicioRepo.findAll();
-        return listaServicio;
+        List <ServicioDTO> listaServicioDTO= new ArrayList<>();
+        ServicioDTO serviDTO = new ServicioDTO();
+
+        for (Servicio servi : listaServicio){
+
+            serviDTO.setServicio(servi.getServicio());
+            serviDTO.setIdentificacion(servi.getIdentificacion());
+            serviDTO.setCliente(servi.getCliente());
+            serviDTO.setUlitmoPago(servi.getUlitmoPago());
+            serviDTO.setFechaInicio(servi.getFechaInicio());
+            serviDTO.setIltimaFActuracion(servi.getUltimaFacturacion());
+            serviDTO = new ServicioDTO();
+
+        }
+
+
+        return listaServicioDTO;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.celsia.internet.service;
 
+import com.celsia.internet.dto.ServicioDTO;
 import com.celsia.internet.model.Cliente;
 import com.celsia.internet.model.Servicio;
 
@@ -9,7 +10,7 @@ public interface IServicioService  {
 
 
     //para traer la infomraicon
-    public List<Servicio> getServicio();
+    public List<ServicioDTO> getServicio();
 
     // para guardar la informacion
     public void saveServicio(Servicio servicio);

@@ -18,7 +18,7 @@ public class Servicio {
     private Long  identificacion;
     private  String servicio;
     private LocalDate fechaInicio ;
-    private LocalDate iltimaFActuracion;
+    private LocalDate UltimaFacturacion;
     private   Integer ulitmoPago ;
     @OneToOne
     @JoinColumn(name="cliente", referencedColumnName = "identificacion")
