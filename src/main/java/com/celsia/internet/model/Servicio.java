@@ -15,13 +15,20 @@ import java.time.LocalDate;
 @Table ( name = "servicio")
 public class Servicio {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long  identificacion;
+    private Long id;
+    @Column (nullable = false)
+    private String  identificacion;
+    @Column ( nullable=false)
     private  String servicio;
+    @Column ( nullable=false)
     private LocalDate fechaInicio ;
+    @Column ( nullable=false)
     private LocalDate UltimaFacturacion;
+    @Column ( nullable=false)
     private   Integer ulitmoPago ;
+
     @OneToOne
-    @JoinColumn(name="cliente", referencedColumnName = "identificacion")
+    @JoinColumn(name="cliente", referencedColumnName = "identificacion",nullable=false)
     private   Cliente cliente;
 
 }

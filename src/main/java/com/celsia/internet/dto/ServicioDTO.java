@@ -14,7 +14,8 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ServicioDTO {
-    private Long identificacion;
+    private Long id;
+    private String identificacion;
     private String servicio;
     private LocalDate fechaInicio;
     private LocalDate iltimaFActuracion;

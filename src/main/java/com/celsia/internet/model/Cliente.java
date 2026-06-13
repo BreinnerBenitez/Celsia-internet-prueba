@@ -16,14 +16,20 @@ import java.time.LocalDate;
 @Table (name= "cliente")
 public class Cliente {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  Long identificacion;
-    @Column (name="nombres")
+    private  Long id;
+    @Column (nullable = false, unique = true)
+    private  String identificacion;
+    @Column (name="nombres", nullable=false )
     private  String nombre;
-    @Column (name="apellidos")
+    @Column (name="apellidos",nullable=false)
     private  String apellido;
+    @Column ( nullable=false)
     private  String tipoIdentificacion;
-    private LocalDate FechaNacimiento ;
+    @Column ( nullable=false)
+    private LocalDate fechaNacimiento ;
+    @Column ( nullable=false)
     private  String  numeroCelular;
+    @Column ( nullable=false)
     private   String   correoElectronico;
 
 

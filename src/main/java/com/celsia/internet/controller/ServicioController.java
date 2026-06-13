@@ -64,8 +64,8 @@ public class ServicioController {
             @ApiResponse(responseCode = "404", description = "Servicio no encontrado")})
 
     @PutMapping("/{id}")
-    public Servicio editPersona(@PathVariable Long id, @RequestBody Servicio service) {
-        service.setIdentificacion(id);
+    public String editPersona(@PathVariable String identificacion, @RequestBody Servicio service) {
+        service.setIdentificacion(identificacion);
         serviService.editServicio(service);
 
         return serviService.findServicio(service.getIdentificacion());

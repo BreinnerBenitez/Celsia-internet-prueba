@@ -8,19 +8,18 @@ import java.util.List;
 public interface IClienteService {
 
 
-    //para traer la infomraicon
-     List<ClienteDTO> getCliente();
+    List<ClienteDTO> getCliente();
 
-    // para guardar la informacion
-     void saveCliente(Cliente cliente);
 
-    //  para borar informacion
-     void deleteCliente(Long id);
+    void saveCliente(ClienteDTO clienteDTO);
 
-    //lectura de un solo objeto
-    Cliente findCliente(Long id);
 
-    //edición/modificación
-     void editCliente (Cliente cliente);
+    void deleteCliente(String identificaicon);
+
+
+    Cliente findCliente(String identificacion);
+
+
+    void editCliente(ClienteDTO clienteDTO);
 
 }
