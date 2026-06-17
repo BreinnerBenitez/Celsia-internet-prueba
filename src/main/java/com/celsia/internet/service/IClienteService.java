@@ -17,7 +17,7 @@ public interface IClienteService {
     void deleteCliente(String identificaicon);
 
 
-    Cliente findCliente(String identificacion);
+    ClienteDTO findCliente(String identificacion);
 
 
     void editCliente(ClienteDTO clienteDTO);

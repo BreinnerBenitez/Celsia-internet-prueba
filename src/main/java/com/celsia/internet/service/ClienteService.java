@@ -82,20 +82,37 @@ public class ClienteService implements IClienteService {
     }
 
     @Override
-    public Cliente findCliente(String identificacion) {
+    public ClienteDTO findCliente(String identificacion) {
 
-        return clienteRepo.findByIdentificacion(identificacion)
+       Cliente  cliente= clienteRepo.findByIdentificacion(identificacion)
                 .orElseThrow(() ->
                         new RuntimeException(
                                 "Cliente no encontrado"));
+
+        ClienteDTO clienteDTO = new ClienteDTO();
+
+        clienteDTO.setId(cliente.getId());
+        clienteDTO.setIdentificacion(cliente.getIdentificacion());
+        clienteDTO.setNombre(cliente.getNombre());
+        clienteDTO.setApellido(cliente.getApellido());
+        clienteDTO.setTipoIdentificacion(cliente.getTipoIdentificacion());
+        clienteDTO.setFechaNacimiento(cliente.getFechaNacimiento());
+        clienteDTO.setNumeroCelular(cliente.getNumeroCelular());
+        clienteDTO.setCorreoElectronico(cliente.getCorreoElectronico());
+
+
+        return clienteDTO;
     }
 
     @Override
     public void editCliente(ClienteDTO clienteDTO) {
 
 
-        Cliente cliente = findCliente(
-                clienteDTO.getIdentificacion());
+        Cliente cliente = clienteRepo.findByIdentificacion(clienteDTO.getIdentificacion())
+                .orElseThrow(() ->
+                        new RuntimeException(
+                                "Cliente no encontrado"));
+
 
         cliente.setNombre(clienteDTO.getNombre());
         cliente.setApellido(clienteDTO.getApellido());

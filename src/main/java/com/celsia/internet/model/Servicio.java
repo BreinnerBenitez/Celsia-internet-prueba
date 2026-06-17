@@ -23,11 +23,11 @@ public class Servicio {
     @Column ( nullable=false)
     private LocalDate fechaInicio ;
     @Column ( nullable=false)
-    private LocalDate UltimaFacturacion;
+    private LocalDate ultimaFacturacion;
     @Column ( nullable=false)
-    private   Integer ulitmoPago ;
+    private   Integer ultimoPago ;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name="cliente", referencedColumnName = "identificacion",nullable=false)
     private   Cliente cliente;
 

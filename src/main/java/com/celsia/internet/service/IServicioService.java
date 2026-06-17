@@ -7,7 +7,7 @@ import com.celsia.internet.model.Servicio;
 import java.util.List;
 
 public interface IServicioService {
-
+/*
 
     public List<ServicioDTO> getServicio();
 
@@ -22,5 +22,18 @@ public interface IServicioService {
 
 
     public void editServicio(Servicio Servicio);
+    */
 
+    List<ServicioDTO> getServicios();
+
+    ServicioDTO findServicio(String identificacion);
+
+    void saveServicio(ServicioDTO servicioDTO);
+
+    void editServicio(ServicioDTO servicioDTO);
+
+    void deleteServicio(String identificacion);
+
+    List<ServicioDTO> getServiciosCliente(
+            String identificacionCliente);
 }

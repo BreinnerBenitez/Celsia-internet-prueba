@@ -38,6 +38,17 @@ public class ClienteController {
         return ResponseEntity.ok(clienteService.getCliente());
     }
 
+    @Operation(
+            summary = "Buscar cliente por identificación",
+            description = "Retorna un cliente según su identificación"
+    )
+    @GetMapping("/{identificacion}")
+    public ResponseEntity<ClienteDTO> findCliente(@PathVariable String identificacion) {
+
+        return ResponseEntity.ok(clienteService.findCliente(identificacion));
+
+    }
+
 
     @Operation(summary = "Crear un cliente")
     @ApiResponses({

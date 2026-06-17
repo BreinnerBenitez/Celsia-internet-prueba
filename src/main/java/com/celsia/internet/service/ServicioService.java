@@ -3,6 +3,7 @@ package com.celsia.internet.service;
 import com.celsia.internet.dto.ServicioDTO;
 import com.celsia.internet.model.Cliente;
 import com.celsia.internet.model.Servicio;
+import com.celsia.internet.repository.IClienteRepository;
 import com.celsia.internet.repository.IServicioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,51 +15,65 @@ import java.util.List;
 public class ServicioService implements IServicioService {
 
 
-    @Autowired
-    private IServicioRepository servicioRepo;
+
+    private final IServicioRepository servicioRepo;
+
+      public ServicioService (IServicioRepository servicioRepo){
+
+          this.servicioRepo = servicioRepo;
+      }
+
+
+
 
     @Override
-    public List<ServicioDTO> getServicio() {
+    public List<ServicioDTO> getServicios() {
+        List<Servicio> listaServicios = servicioRepo.findAll();
 
-        List<Servicio> listaServicio = servicioRepo.findAll();
-        List <ServicioDTO> listaServicioDTO= new ArrayList<>();
-        ServicioDTO serviDTO = new ServicioDTO();
+        List<ServicioDTO> listaServiciosDTO = new ArrayList<>();
 
-        for (Servicio servi : listaServicio){
+        for (Servicio servicio : listaServicios) {
 
-            serviDTO.setServicio(servi.getServicio());
-            serviDTO.setIdentificacion(servi.getIdentificacion());
-            serviDTO.setCliente(servi.getCliente());
-            serviDTO.setUlitmoPago(servi.getUlitmoPago());
-            serviDTO.setFechaInicio(servi.getFechaInicio());
-            serviDTO.setIltimaFActuracion(servi.getUltimaFacturacion());
-            serviDTO = new ServicioDTO();
+            ServicioDTO dto = new ServicioDTO();
 
+            dto.setId(servicio.getId());
+            dto.setIdentificacion(servicio.getIdentificacion());
+            dto.setServicio(servicio.getServicio());
+            dto.setFechaInicio(servicio.getFechaInicio());
+            dto.setUltimaFacturacion(servicio.getUltimaFacturacion());
+            dto.setUltimoPago(servicio.getUltimoPago());
+
+            dto.setIdentificacionCliente(
+                    servicio.getCliente().getIdentificacion());
+
+            listaServiciosDTO.add(dto);
         }
 
-
-        return listaServicioDTO;
+        return listaServiciosDTO;
     }
 
     @Override
-    public void saveServicio(Servicio servicio) {
-        servicioRepo.save(servicio);
+    public ServicioDTO findServicio(String identificacion) {
+        return null;
     }
 
     @Override
-    public void deleteServicio(Long id) {
-        servicioRepo.deleteById(id);
-    }
-
-    @Override
-    public Servicio findServicio(Long id) {
-        return servicioRepo.findById(id).orElse(null);
-
+    public void saveServicio(ServicioDTO servicioDTO) {
 
     }
 
     @Override
-    public void editServicio(Servicio Servicio) {
-        this.saveServicio(Servicio);
+    public void editServicio(ServicioDTO servicioDTO) {
+
+    }
+
+    @Override
+    public void deleteServicio(String identificacion) {
+
+    }
+
+    @Override
+    public List<ServicioDTO> getServiciosCliente(String identificacionCliente) {
+        return List.of();
     }
 }
