@@ -15,15 +15,14 @@ import java.util.List;
 public class ServicioService implements IServicioService {
 
 
-
     private final IServicioRepository servicioRepo;
+    private final IClienteRepository clienteRepo;
 
-      public ServicioService (IServicioRepository servicioRepo){
+    public ServicioService(IServicioRepository servicioRepo, IClienteRepository clienteRepo) {
 
-          this.servicioRepo = servicioRepo;
-      }
-
-
+        this.servicioRepo = servicioRepo;
+        this.clienteRepo =clienteRepo;
+    }
 
 
     @Override
@@ -54,21 +53,91 @@ public class ServicioService implements IServicioService {
 
     @Override
     public ServicioDTO findServicio(String identificacion) {
-        return null;
+
+
+        Servicio servicio = servicioRepo
+                .findByIdentificacion(identificacion)
+                .orElseThrow(() ->
+                        new RuntimeException(
+                                "Servicio no encontrado"));
+
+        return convertirDTO(servicio);
+
+
     }
 
     @Override
     public void saveServicio(ServicioDTO servicioDTO) {
+
+        if (servicioRepo.existsByIdentificacion(
+                servicioDTO.getIdentificacion())) {
+
+            throw new RuntimeException(
+                    "El servicio ya existe");
+        }
+
+        Cliente cliente = clienteRepo
+                .findByIdentificacion(
+                        servicioDTO.getIdentificacionCliente())
+                .orElseThrow(() ->
+                        new RuntimeException(
+                                "Cliente no encontrado"));
+
+        Servicio servicio = convertirEntidad(
+                servicioDTO,
+                cliente);
+
+        servicioRepo.save(servicio);
+
 
     }
 
     @Override
     public void editServicio(ServicioDTO servicioDTO) {
 
+
+        Servicio servicio = servicioRepo
+                .findByIdentificacion(
+                        servicioDTO.getIdentificacion())
+                .orElseThrow(() ->
+                        new RuntimeException(
+                                "Servicio no encontrado"));
+
+        Cliente cliente = clienteRepo
+                .findByIdentificacion(
+                        servicioDTO.getIdentificacionCliente())
+                .orElseThrow(() ->
+                        new RuntimeException(
+                                "Cliente no encontrado"));
+
+        servicio.setServicio(
+                servicioDTO.getServicio());
+
+        servicio.setFechaInicio(
+                servicioDTO.getFechaInicio());
+
+        servicio.setUltimaFacturacion(
+                servicioDTO.getUltimaFacturacion());
+
+        servicio.setUltimoPago(
+                servicioDTO.getUltimoPago());
+
+        servicio.setCliente(cliente);
+
+        servicioRepo.save(servicio);
+
     }
 
     @Override
     public void deleteServicio(String identificacion) {
+
+        Servicio servicio = servicioRepo
+                .findByIdentificacion(identificacion)
+                .orElseThrow(() ->
+                        new RuntimeException(
+                                "Servicio no encontrado"));
+
+        servicioRepo.delete(servicio);
 
     }
 
@@ -76,4 +145,51 @@ public class ServicioService implements IServicioService {
     public List<ServicioDTO> getServiciosCliente(String identificacionCliente) {
         return List.of();
     }
+
+
+
+
+    private ServicioDTO convertirDTO(Servicio servicio) {
+
+        ServicioDTO dto = new ServicioDTO();
+
+        dto.setId(servicio.getId());
+        dto.setIdentificacion(servicio.getIdentificacion());
+        dto.setServicio(servicio.getServicio());
+        dto.setFechaInicio(servicio.getFechaInicio());
+        dto.setUltimaFacturacion(servicio.getUltimaFacturacion());
+        dto.setUltimoPago(servicio.getUltimoPago());
+
+        dto.setIdentificacionCliente(
+                servicio.getCliente().getIdentificacion());
+
+        return dto;
+    }
+
+    private Servicio convertirEntidad(
+            ServicioDTO servicioDTO,
+            Cliente cliente){
+
+        Servicio servicio = new Servicio();
+
+        servicio.setIdentificacion(
+                servicioDTO.getIdentificacion());
+
+        servicio.setServicio(
+                servicioDTO.getServicio());
+
+        servicio.setFechaInicio(
+                servicioDTO.getFechaInicio());
+
+        servicio.setUltimaFacturacion(
+                servicioDTO.getUltimaFacturacion());
+
+        servicio.setUltimoPago(
+                servicioDTO.getUltimoPago());
+
+        servicio.setCliente(cliente);
+
+        return servicio;
+    }
+
 }
