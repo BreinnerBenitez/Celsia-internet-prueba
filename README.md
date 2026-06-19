@@ -40,7 +40,8 @@ un rango de ip, el sistema operativo pide la ip al router el router se la asigna
 
 ____
 **refacto mejoras** 
-1)implementacion de los dto en clientes
+1)implementacion de los dto en clientes y servicio 
+
 
 
 
