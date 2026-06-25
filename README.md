@@ -43,8 +43,19 @@ ____
 **relizare mejoras sugeridas en otra rama para no tocar la de la prueba  en el tiempo propuesto; que se hizo con mis
 colegas.**
 1)implementacion de los dto en clientes y servicio primer merge desde refactor-mejoras
+____
+
 2) pruebas funcionales en carpeta postman
 
+Importar la colección de Postman ubicada en:
+
+/postman/prueba tecnica celsia.postman_collection.json
+
+La colección contiene:
+
+- CRUD Cliente
+- CRUD Servicio
+- Consulta de servicios por cliente
 
 
 
