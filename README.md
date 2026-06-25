@@ -42,7 +42,8 @@ ____
 **refacto mejoras**
 **relizare mejoras sugeridas en otra rama para no tocar la de la prueba  en el tiempo propuesto; que se hizo con mis
 colegas.**
-1)implementacion de los dto en clientes y servicio primer merge desde refactor-mejoras 
+1)implementacion de los dto en clientes y servicio primer merge desde refactor-mejoras
+2) pruebas funcionales en carpeta postman
 
 
 
