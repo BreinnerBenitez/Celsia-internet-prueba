@@ -3,21 +3,24 @@ package com.celsia.internet.service;
 import com.celsia.internet.dto.ClienteDTO;
 import com.celsia.internet.model.Cliente;
 import com.celsia.internet.repository.IClienteRepository;
+import com.celsia.internet.repository.IServicioRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@RequiredArgsConstructor
 @Service
 public class ClienteService implements IClienteService {
 
 
     private final IClienteRepository clienteRepo;
+    private final IServicioRepository servicioRepo;
 
-    public ClienteService(IClienteRepository clienteRepo) {
+    /*public ClienteService(IClienteRepository clienteRepo) {
         this.clienteRepo = clienteRepo;
-    }
+    }*/
 
     @Override
     public List<ClienteDTO> getCliente() {
@@ -76,7 +79,16 @@ public class ClienteService implements IClienteService {
                         new RuntimeException(
                                 "Cliente no encontrado"));
 
+        if (!servicioRepo
+                .findByClienteIdentificacion(identificacion)
+                .isEmpty()) {
+
+            throw new RuntimeException(
+                    "No se puede eliminar el cliente porque tiene servicios asociados");
+        }
+
         clienteRepo.delete(cliente);
+
 
 
     }

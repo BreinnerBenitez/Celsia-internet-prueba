@@ -21,7 +21,7 @@ public class ServicioService implements IServicioService {
     public ServicioService(IServicioRepository servicioRepo, IClienteRepository clienteRepo) {
 
         this.servicioRepo = servicioRepo;
-        this.clienteRepo =clienteRepo;
+        this.clienteRepo = clienteRepo;
     }
 
 
@@ -143,10 +143,21 @@ public class ServicioService implements IServicioService {
 
     @Override
     public List<ServicioDTO> getServiciosCliente(String identificacionCliente) {
-        return List.of();
+        List<Servicio> servicios =
+                servicioRepo.findByClienteIdentificacion(
+                        identificacionCliente);
+
+        List<ServicioDTO> listaDTO =
+                new ArrayList<>();
+
+        for (Servicio servicio : servicios) {
+
+            listaDTO.add(
+                    convertirDTO(servicio));
+        }
+
+        return listaDTO;
     }
-
-
 
 
     private ServicioDTO convertirDTO(Servicio servicio) {
@@ -168,7 +179,7 @@ public class ServicioService implements IServicioService {
 
     private Servicio convertirEntidad(
             ServicioDTO servicioDTO,
-            Cliente cliente){
+            Cliente cliente) {
 
         Servicio servicio = new Servicio();
 
