@@ -1,0 +1,42 @@
+#version: '3'  #dos espacio en el yml cada atributo
+services:
+  celsiainternet:  # nombre de la app establecido en application.properties
+    build:  celsiainternet # nombre de la carpeta donde esta el Dockerfile
+    mem_limit: 512m
+    ports:
+      - "8080:8080"
+    environment:
+      DB_URL: jdbc:mysql://celsia:3306/celsia?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      USER: root
+      PASSWORD: breinner
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"  
+    depends_on:
+      celsia:
+        condition: service_healthy #siempre lo puedo utilizar  base de datos 
+  celsia:  #configuracion de la base de datos
+    image: mysql:8.0.33 # misma version que puse en en el pom
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: breinner
+      MYSQL_PASSWORD: breinner
+      MYSQL_DATABASE: celsia
+    restart: always
+    volumes:
+      - celsia_datos:/var/lib/mysql
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"    
+    healthcheck:
+      test: ["CMD", "mysqladmin","ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 10
+volumes:
+  celsia_datos:
